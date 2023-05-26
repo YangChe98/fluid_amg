@@ -1,5 +1,5 @@
 function x=smoothing(A,b,x,pre,smooth);
-weight=0.1;
+weight=0.3;
  if smooth==1
              x=weightJacobimethod(A,b,x,weight,pre);
          elseif smooth == 2 
