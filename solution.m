@@ -76,7 +76,7 @@ A(element_coordinate(i,:),element_coordinate(i,:))=A(element_coordinate(i,:),ele
 end
 
 
-Atotal=[A,B;B.',zeros(pbasis_function_number,pbasis_function_number)];
+Atotal=[A,B;-B.',zeros(pbasis_function_number,pbasis_function_number)];
 
 %%%%%%%%%%%%%%%%%%%%% boundary condition %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i=1:node_number
@@ -98,8 +98,8 @@ end
  right=right-Atotal(:,ubasis_function_number+1)*node_coordinate(1,6);
         Atotal(:,ubasis_function_number+1)=0;
         Atotal(ubasis_function_number+1,:)=0;
-        Atotal(ubasis_function_number+1,ubasis_function_number+1)=1;
-        right(ubasis_function_number+1,1)=node_coordinate(1,6);
+        Atotal(ubasis_function_number+1,ubasis_function_number+1)=-1;
+        right(ubasis_function_number+1,1)=-node_coordinate(1,6);
  
 
 %%%%%%%%%%%%%%%%%% solution %%%%%%%%%%%%%%
