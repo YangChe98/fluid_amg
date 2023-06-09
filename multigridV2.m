@@ -59,7 +59,7 @@ Amatrix.A2{1}=A(ubasis_function_number+1:ubasis_function_number+pbasis_function_
 %                     Amatrix.x_tmp{k}=smoothing(Amatrix.Ac{k},Amatrix.f{k},Amatrix.x_tmp{k},pre,smooth);
 %                 end
 %                 Amatrix.rh{k}=Amatrix.x_tmp{k};
-                Amatrix.rh{k}=Amatrix.Ac{k}\Amatrix.f{k};
+              Amatrix.rh{k}=Amatrix.Ac{k}\Amatrix.f{k};
             else
 
                 for j=1:pre

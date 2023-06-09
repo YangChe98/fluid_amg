@@ -23,13 +23,14 @@ ubasis_function_number=node_number*2;
 pbasis_function_number=(x_n+1)*(y_n+1);
 [X0,Y0,node_coordinate0,element_coordinate0,X,Y,node_coordinate,element_coordinate]=meshgenerate(x_min,x_max,y_min,y_max,x_n,y_n);
 %[x,res]=solution(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
-[x,res]=solution6(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
+% [x1,res1]=solution6(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
 %[x,res]=solution2(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
-%[x,res]=solution3(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
-%[x,res]=solution5(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
+% [x,res]=solution4(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
+[x,res]=solution5(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
 %Ac=RScoarsen(Atotal);
 %Ac=Beckcoarsen(Atotal);
 %basisfunctionweight=solution(nu,x_n,y_n,element_number,localbasisfunctionnumber1,element_coordinate0,element_coordinate,node_coordinate,ubasis_function_number,pbasis_function_number,node_number);
 %plotuvp(x_min,x_n,x_max,y_min,y_n,y_max,basisfunctionweight,node_number,ubasis_function_number,pbasis_function_number)
  %plotuvp0(x_min,x_n,x_max,y_min,y_n,y_max,basisfunctionweight,node_number,ubasis_function_number,pbasis_function_number)
-toc
+plotuvp1(x_min,x_n,x_max,y_min,y_n,y_max,x,node_number,ubasis_function_number,pbasis_function_number)
+ toc

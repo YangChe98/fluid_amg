@@ -76,7 +76,7 @@ A(element_coordinate(i,:),element_coordinate(i,:))=A(element_coordinate(i,:),ele
 end
 
 
-Atotal=[A,B;B.',zeros(pbasis_function_number,pbasis_function_number)];
+Atotal=[A,B;-B.',zeros(pbasis_function_number,pbasis_function_number)];
 
 %%%%%%%%%%%%%%%%%%%%% boundary condition %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for i=1:node_number
@@ -98,8 +98,8 @@ end
  right=right-Atotal(:,ubasis_function_number+1)*node_coordinate(1,6);
         Atotal(:,ubasis_function_number+1)=0;
         Atotal(ubasis_function_number+1,:)=0;
-        Atotal(ubasis_function_number+1,ubasis_function_number+1)=1;
-        right(ubasis_function_number+1,1)=node_coordinate(1,6);
+        Atotal(ubasis_function_number+1,ubasis_function_number+1)=-1;
+        right(ubasis_function_number+1,1)=-node_coordinate(1,6);
  
 
 %%%%%%%%%%%%%%%%%% solution %%%%%%%%%%%%%%
@@ -107,7 +107,7 @@ end
 pre=3;post=3;
 cycle=1;
 smooth=1;
-grids=7;
+grids=3;
 maxit=1e6;
 tol=1e-7;
 %BT=B.';
@@ -115,10 +115,15 @@ IA=speye(size(A));
 IB=speye(pbasis_function_number,pbasis_function_number);
 D=diag(A);
 Dainv=sparse(diag(1./D));
-alpha=1e-4;
- matprecond=[IA,-alpha*Dainv*B;sparse(pbasis_function_number,ubasis_function_number),IB];
-  %matprecond=[IA,-alpha*Dainv*B;sparse(pbasis_function_number,ubasis_function_number),IB];
-Ahat=Atotal*matprecond;
+alpha=8;
+% matprecond=[IA,-alpha*Dainv*B;sparse(pbasis_function_number,ubasis_function_number),IB];
+ matleftprecond=[IA,sparse(ubasis_function_number,pbasis_function_number);alpha*B.'*Dainv,IB];
+Ahat=matleftprecond*Atotal;%*matprecond;
+right=matleftprecond*right;
 x0=0*right;
 weight=0.5;
-[x,res]=GSmethod2(Ahat,right,x0,1e7);
+% [x,res]=weightJacobimethod2(Ahat,right,x0,weight,1e7);
+[x,res] = multigridV2(ubasis_function_number,pbasis_function_number,Ahat,right,pre,post,cycle,smooth,grids,maxit,tol);
+%x=matprecond*x;
+% x=Ahat;
+ %res=right;

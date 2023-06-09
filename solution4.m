@@ -122,3 +122,4 @@ Ahat=Atotal*matprecond;
 x0=0*right;
 weight=0.5;
 [x,res]=weightJacobimethod2(Ahat,right,x0,weight,1e7);
+x=matprecond*x;
